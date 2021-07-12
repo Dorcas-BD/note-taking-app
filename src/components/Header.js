@@ -3,6 +3,8 @@ import { AppBar, Button, Container, Drawer, Divider, Toolbar, List, ListItem, Li
 import MenuIcon from '@material-ui/icons/Menu'
 // import HomeOutlinedIcon from '@'
 import { useState } from 'react'
+import { BrowserRouter, Link } from 'react-router-dom'
+
  
 
 const useStyles = makeStyles({
@@ -21,24 +23,24 @@ const Header = () => {
   const classes = useStyles();
 
   //for left Naviation
-  const {state, setState} = useState();
+  const [state, setState] = useState(false);
   const toggleDrawer = (toggle) => (event) => {
     //left naviation disappear after clicking outside the naviation
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      return
+      return;
     }
     setState(toggle);
   }
 
   const list = () => (
     <div
-    className={classes.list} 
-    role="presentation" 
-    onClick={toggleDrawer(false)} 
-    onkeydown={toggleDrawer(false)}
+     className={classes.list} 
+     role="presentation" 
+     onClick={toggleDrawer(false)} 
+     onkeydown={toggleDrawer(false)}
     >
       <List>
         <ListItem button>
@@ -48,27 +50,18 @@ const Header = () => {
       </List>
       <List>
         <ListItem button>
-          {/* <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon> */}
-          <ListItemText primary="About"/>
+          <ListItemText primary="Login"/>
         </ListItem>
       </List>
       <Divider />
       <List>
         <ListItem button>
-          {/* <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon> */}
-          <ListItemText primary="Settings"/>
+          <ListItemText primary="Signup"/>
         </ListItem>
       </List>
       <List>
         <ListItem button>
-          {/* <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon> */}
-          <ListItemText primary="Login"/>
+          <ListItemText primary="About"/>
         </ListItem>
       </List>
 
@@ -83,13 +76,30 @@ const Header = () => {
             <IconButton color="inherit" edge="start" aria-label="Menu" onClick={toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>Note App</Typography>
-            <Button color="inherit">Login</Button>
+            <Typography variant="h5" className={classes.title}>Note App</Typography>
+              <BrowserRouter>
+                {/* <p>
+                  <Link to="/login/">Login</Link>
+                </p>
+                <p>
+                  <Link to="/signup">Sign up</Link>
+                </p> */}
+
+                <Button color="inherit">
+                  Login <Link to="/login"></Link>
+                </Button>
+                <Button color="inherit">
+                  SignUp <Link to="/signup"></Link>
+                </Button>
+              </BrowserRouter>
           </Toolbar>
         </Container>
         
       </AppBar>
-      <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+      <Drawer 
+       anchor="left" 
+       open={state} 
+       onClose={toggleDrawer(false)}>
         {list}
       </Drawer>
     </div>

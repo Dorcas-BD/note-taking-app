@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function FormDialog(onSubmit) {
+export default function AddNoteForm({onSubmit}) {
   const [open, setOpen] = React.useState(false);
   const [note, setNote] = React.useState();
   const classes = useStyles({
@@ -46,10 +46,10 @@ export default function FormDialog(onSubmit) {
                 <AddIcon />
             </Fab>
             <Dialog maxWidth="sm" fullWidth={true} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">Add a Note</DialogTitle>
                 <DialogContent>
                 <DialogContentText>
-                    To add Note start typin er
+                    To add Note start typing here
                 </DialogContentText>
                 <TextField
                     onChange={(e) => setNote({...note, title: e.target.value})}
@@ -68,6 +68,7 @@ export default function FormDialog(onSubmit) {
                     id="name"
                     label="Details"
                     type="text"
+                    size="small"
                     fullWidth
                 />
                 </DialogContent>
