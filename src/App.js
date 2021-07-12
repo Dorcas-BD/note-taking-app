@@ -3,40 +3,13 @@ import React from 'react';
 import { useState } from 'react';
 import Header from './components/Header';
 import CustomCard from './components/Card';
-import FormDialog from './components/FormDialog';
+import AddNoteForm from './components/AddNoteForm';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Login from './components/login/Login';
+import Signup from './components/signup/Signup';
 
-const noteData = [
-  // {
-  //   id: 1,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // },
-  // {
-  //   id: 2,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // },
-  // {
-  //   id: 3,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // },
-  // {
-  //   id: 4,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // },
-  // {
-  //   id: 5,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // },
-  // {
-  //   id: 6,
-  //   title: "Goal",
-  //   details: " Someday I am going to be a very good developer."
-  // }
-]
+
+const noteData = []
 
 
 function App() {
@@ -60,7 +33,11 @@ function App() {
         <Grid container spacing={3}>
           {(notes.length === 0) ? (
             <div style={{width: '100%', paddingTop: 200}}>
-              <Typography variant="h1" color="textSecondary" style={{textAlign: 'center'}} component="p">Start Adding your note here</Typography>
+              <Typography 
+               variant="h1" 
+               color="textSecondary" 
+               style={{textAlign: 'center'}} 
+               component="p">Start Adding your note here</Typography>
             </div>
           ):
           notes.map((item) => (
@@ -70,7 +47,18 @@ function App() {
           ))}
         </Grid>
       </Container>
-       <FormDialog onSubmit={handlerAddNote}/> 
+       <AddNoteForm onSubmit={handlerAddNote}/> 
+
+      <BrowserRouter>
+        <div>          
+          <Switch>
+            <Route exact path="/" component={Header} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+      
     </div>
   );
 }
